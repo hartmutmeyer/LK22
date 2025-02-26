@@ -119,12 +119,12 @@ class ClientThread extends Thread {
 		int zeichen;
 		boolean highscoreFileExists = false;
 				
+		URL url = getClass().getResource("rekord.txt");
+		if (url == null) {
+			System.out.println("Fehler beim Schreiben: Datei rekord.txt existiert nicht.");
+			return;
+		}
 		synchronized (monitor) {
-			URL url = getClass().getResource("rekord.txt");
-			if (url == null) {
-				System.out.println("Fehler beim Schreiben: Datei rekord.txt existiert nicht.");
-				return;
-			}
 			try (InputStream is = new FileInputStream(url.getFile());
 					InputStreamReader inFile = new InputStreamReader(is, "UTF-8")) {
 				while ((zeichen = inFile.read()) != '$') {
